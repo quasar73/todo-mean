@@ -7,3 +7,5 @@ router.post('/login', controller.login);
 
 // api/auth/register
 router.post('/register', controller.register);
+
+module.exports = router;
