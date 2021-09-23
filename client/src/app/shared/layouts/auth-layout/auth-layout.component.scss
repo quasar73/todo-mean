@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@600&display=swap');
+
+::ng-deep body {
+    background-color: #000204;
+    background-image: url('../../../../assets/images/auth-bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.wrap {
+    nav {
+        height: 82px;
+        display: flex;
+        justify-content: center;
+        backdrop-filter: brightness(70%);
+
+        .logo-wrap {
+            height: 100%;
+            width: fit-content;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .logo-text {
+                color: white;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+                font-size: 32pt;
+                font-family: 'Be Vietnam Pro', sans-serif;
+            }
+        }
+    }
+}
