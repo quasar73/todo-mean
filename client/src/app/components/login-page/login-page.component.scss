@@ -1,0 +1,19 @@
+.wrap {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .card {
+        margin-top: -82px;
+        background-color: white;
+        height: 490px;
+        width: 490px;
+        border-radius: 16px;
+
+        -webkit-box-shadow: 3px 3px 10px 0px rgba(50, 50, 50, 0.5);
+        -moz-box-shadow:    3px 3px 10px 0px rgba(50, 50, 50, 0.5);
+        box-shadow:         3px 3px 10px 0px rgba(50, 50, 50, 0.5);
+    }
+}

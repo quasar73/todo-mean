@@ -7,7 +7,14 @@
     background-size: cover;
 }
 
+::ng-deep html, ::ng-deep body {
+    height: 100%;
+    overflow: hidden;
+}
+
 .wrap {
+    height: 100%;
+
     nav {
         height: 82px;
         display: flex;
@@ -28,5 +35,9 @@
                 font-family: 'Be Vietnam Pro', sans-serif;
             }
         }
+    }
+
+    main {
+        height: calc(100% - 82px);
     }
 }
