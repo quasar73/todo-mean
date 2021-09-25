@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const keys = require('./config/keys.dev');
 
 const authRoutes = require('./routes/auth');
+const lsitRoutes = require('./routes/list');
 
 const app = express();
 
@@ -19,5 +20,6 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use('/api/auth', authRoutes);
+app.use('/api/list', lsitRoutes);
 
 module.exports = app;
