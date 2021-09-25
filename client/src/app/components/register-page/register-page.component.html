@@ -1,1 +1,35 @@
-<p>register-page works!</p>
+<div class="wrap">
+    <div class="card" [@cardOpen]="cardState">
+        <form [formGroup]="registerForm">
+            <div class="title">
+                Sing Up
+            </div>
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="Email" fromFieldName="email">
+                <mat-icon matSuffix>email</mat-icon>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>User name</mat-label>
+                <input matInput placeholder="Email" fromFieldName="email">
+                <mat-icon matSuffix>account_circle</mat-icon>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input matInput placeholder="Password" type="password" fromFieldName="password">
+                <mat-icon matSuffix>vpn_key</mat-icon>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Repeat password</mat-label>
+                <input matInput placeholder="Password" type="password" fromFieldName="password">
+                <mat-icon matSuffix>vpn_key</mat-icon>
+            </mat-form-field>
+            <button mat-flat-button color="primary">
+                Sing Up
+            </button>
+            <a [routerLink]="'/login'" class="register-link">
+                or sing in if you have an account
+            </a>
+        </form>
+    </div>
+</div>
