@@ -1,3 +1,4 @@
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -5,9 +6,11 @@ import { tap, map, switchMap, catchError } from 'rxjs/operators';
 import { AuthService } from 'ngx-auth';
 import { LoginModel } from '../../models/login.model';
 import { RegisterModel } from '../../models/register.model';
-import { environment } from '../../../../environments/environment';
 import { TokenStorage } from './token-storage.service';
 import { BaseDataService } from '../basedata/basedata.service';
+import { UserData } from '../../models/user-data.model';
+
+const jwtHelper = new JwtHelperService();
 
 interface AccessData {
     token: string;
@@ -22,6 +25,17 @@ export class AuthenticationService implements AuthService {
 
     public isAuthorized(): Observable<boolean> {
         return this.tokenStorage.getAccessToken().pipe(map((token) => !!token));
+    }
+
+    public getUserData(): Observable<UserData> {
+        return this.tokenStorage
+            .getAccessToken()
+            .pipe(
+                map(
+                    (token) =>
+                        jwtHelper.decodeToken(token)
+                )
+            );
     }
 
     public getAccessToken(): Observable<string> {
@@ -58,10 +72,7 @@ export class AuthenticationService implements AuthService {
     }
 
     public registrate(registerModel: RegisterModel): Observable<any> {
-        return this.base.post(
-           'auth/register',
-            registerModel
-        );
+        return this.base.post('auth/register', registerModel);
     }
 
     public logout(): void {

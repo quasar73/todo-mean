@@ -49,6 +49,7 @@ export class RegisterPageComponent implements AfterViewInit {
         userName: new FormControl('', [
             Validators.required,
             Validators.minLength(5),
+            Validators.maxLength(16)
         ]),
         password: new FormControl('', [
             Validators.required,

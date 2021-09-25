@@ -6,7 +6,7 @@ import {
     trigger,
 } from '@angular/animations';
 import { HttpErrorResponse } from '@angular/common/http';
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import {
     AbstractControl,
     FormControl,
@@ -44,7 +44,7 @@ import { AuthenticationService } from 'src/app/shared/services/auth';
         ]),
     ],
 })
-export class LoginPageComponent implements AfterViewInit {
+export class LoginPageComponent implements AfterViewInit, OnInit {
     cardState = 'invisible';
     isPending = false;
     wrongCredentials = false;
@@ -61,6 +61,14 @@ export class LoginPageComponent implements AfterViewInit {
         private authService: AuthenticationService,
         private router: Router
     ) {}
+
+    ngOnInit(): void {
+        this.authService.isAuthorized().subscribe((result) => {
+            if (result) {
+                this.router.navigate(['/main']);
+            }
+        })
+    }
 
     ngAfterViewInit(): void {
         setTimeout(() => {
@@ -80,7 +88,7 @@ export class LoginPageComponent implements AfterViewInit {
             if (this.loginForm.valid) {
                 this.authService.login(loginModel).subscribe(
                     () => {
-                        this.router.navigate(['/register']);
+                        this.router.navigate(['/main']);
                     },
                     (err: HttpErrorResponse) => {
                         this.isPending = false;

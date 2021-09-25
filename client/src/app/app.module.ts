@@ -16,6 +16,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { RegisterPageComponent } from './components/register-page/register-page.component';
+import { MainLayoutComponent } from './shared/layouts/main-layout/main-layout.component';
+import { MainPageComponent } from './components/main-page/main-page.component';
+import { NavBarComponent } from './shared/layouts/main-layout/nav-bar/nav-bar.component';
 
 @NgModule({
     declarations: [
@@ -23,6 +26,9 @@ import { RegisterPageComponent } from './components/register-page/register-page.
         AuthLayoutComponent,
         LoginPageComponent,
         RegisterPageComponent,
+        MainLayoutComponent,
+        MainPageComponent,
+        NavBarComponent,
     ],
     imports: [
         BrowserModule,

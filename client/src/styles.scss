@@ -1,20 +1,20 @@
-
-@import '~@angular/material/theming';
-@import './app/styles/variables.scss';
+@import "~@angular/material/theming";
+@import "./app/styles/variables.scss";
 
 @include mat-core();
 
 $client-primary: mat-palette($primary-palette);
 $client-accent: mat-palette($mat-pink, A200, A100, A400);
 $client-warn: mat-palette($error-palette);
-$client-theme: mat-light-theme((
-  color: (
-    primary: $client-primary,
-    accent: $client-accent,
-    warn: $client-warn,
-  )
-));
-
+$client-theme: mat-light-theme(
+    (
+        color: (
+            primary: $client-primary,
+            accent: $client-accent,
+            warn: $client-warn,
+        ),
+    )
+);
 
 @include angular-material-theme($client-theme);
 
@@ -22,5 +22,16 @@ body {
     margin: 0;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+    height: 100%;
+}
+
+body {
+    background-color: #000204;
+    background-image: url('./assets/images/bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}

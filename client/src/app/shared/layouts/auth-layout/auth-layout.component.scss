@@ -1,12 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@600&display=swap');
 
-::ng-deep body {
-    background-color: #000204;
-    background-image: url('../../../../assets/images/auth-bg.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
 ::ng-deep html, ::ng-deep body {
     height: 100%;
     overflow: hidden;
@@ -19,7 +12,10 @@
         height: 82px;
         display: flex;
         justify-content: center;
-        backdrop-filter: brightness(70%);
+        backdrop-filter: brightness(110%) blur(8px);
+        -webkit-box-shadow: 3px 3px 20px 0px rgba(0, 0, 0, 0.1);
+        -moz-box-shadow:    3px 3px 20px 0px rgba(0, 0, 0, 0.1);
+        box-shadow:         3px 3px 20px 0px rgba(0, 0, 0, 0.1);
 
         .logo-wrap {
             height: 100%;
