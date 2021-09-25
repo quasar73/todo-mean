@@ -20,7 +20,7 @@ module.exports.login = async (req, res) => {
             });
 
             res.status(200).json({
-                token: `Bearer ${token}`
+                token: `${token}`
             });
         } else {
             res.status(403).json({

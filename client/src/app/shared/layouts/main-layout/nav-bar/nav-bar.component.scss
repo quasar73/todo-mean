@@ -25,6 +25,14 @@ $icon-size: 46px;
         margin-left: 12px;
         margin-right: 12px;
         align-items: center;
+        background-color: rgba(0, 0, 0, 0.35);
+        padding: 16px;
+        border-radius: 32px;
+        backdrop-filter: brightness(130%) blur(14px);
+        -webkit-box-shadow: 3px 3px 8px 0px rgba(0, 0, 0, 0.15);
+        -moz-box-shadow:    3px 3px 8px 0px rgba(0, 0, 0, 0.15);
+        box-shadow:         3px 3px 8px 0px rgba(0, 0, 0, 0.15);
+
 
         .info {
             cursor: default;
@@ -65,5 +73,9 @@ $icon-size: 46px;
                 line-height: inherit;
             }
         }
+    }
+
+    .lists {
+        margin-top: 32px;
     }
 }

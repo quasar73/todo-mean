@@ -1,0 +1,18 @@
+<div class="wrap">
+    <div class="header">
+        <div class="title">
+            Your lists:
+        </div>
+        <button mat-icon-button (click)="add()">
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
+    <div class="lists">
+        <div class="list-item" *ngFor="let item of userLists">
+            <mat-icon>list</mat-icon>
+            <div class="title">
+                {{ item.title }}
+            </div>
+        </div>
+    </div>
+</div>

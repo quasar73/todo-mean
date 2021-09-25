@@ -19,6 +19,7 @@ import { RegisterPageComponent } from './components/register-page/register-page.
 import { MainLayoutComponent } from './shared/layouts/main-layout/main-layout.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { NavBarComponent } from './shared/layouts/main-layout/nav-bar/nav-bar.component';
+import { ToDoListComponent } from './components/to-do-list/to-do-list.component';
 
 @NgModule({
     declarations: [
@@ -29,6 +30,7 @@ import { NavBarComponent } from './shared/layouts/main-layout/nav-bar/nav-bar.co
         MainLayoutComponent,
         MainPageComponent,
         NavBarComponent,
+        ToDoListComponent,
     ],
     imports: [
         BrowserModule,

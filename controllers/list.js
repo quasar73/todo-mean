@@ -18,7 +18,7 @@ module.exports.add = async (req, res) => {
 
 module.exports.delete = async (req, res) => {
     try {
-        const listName = List.findById(req.params.id);
+        const listName = await List.findById(req.params.id);
         List.remove({ _id: req.params.id });
         Item.remove({ list: req.params.id });
         res.status(200).json({
@@ -31,7 +31,7 @@ module.exports.delete = async (req, res) => {
 
 module.exports.getByUserId = async (req, res) => {
     try {
-        const lists = List.find({ user: req.params.id });
+        const lists = await List.find({ user: req.user.id });
         res.status(200).json({
             lists: lists
         });

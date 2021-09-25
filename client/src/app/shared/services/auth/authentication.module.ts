@@ -21,7 +21,7 @@ export function factory(
         TokenStorage,
         AuthenticationService,
         { provide: PROTECTED_FALLBACK_PAGE_URI, useValue: '/' },
-        { provide: PUBLIC_FALLBACK_PAGE_URI, useValue: '/account/login' },
+        { provide: PUBLIC_FALLBACK_PAGE_URI, useValue: '/login' },
         {
             provide: AUTH_SERVICE,
             deps: [AuthenticationService],
