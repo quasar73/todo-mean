@@ -24,15 +24,20 @@ module.exports.login = async (req, res) => {
                 token: `Bearer ${token}`
             });
         } else {
-            res.status(401);
+            res.status(403).json({
+                message: 'Wrong email or password!'
+            });
         }
     } else {
-        res.status(401);
+        res.status(403).json({
+            message: 'Wrong email or password!'
+        });
     }
+    
 }
 
 module.exports.register = async (req, res) => {
-    const user = await User.findOne({ $or: [{ email: req.body.email }, { userName: req.body.userName }] });
+    const user = await User.findOne({ email: req.body.email });
 
     if (user) {
         res.status(409).json({

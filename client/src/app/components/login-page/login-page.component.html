@@ -4,22 +4,40 @@
             <div class="title">
                 Sign In
             </div>
+            <div class="wrong-creds-message">
+                {{ getCredsMessage }}
+            </div>
             <mat-form-field appearance="outline">
                 <mat-label>Email</mat-label>
-                <input matInput placeholder="Email" formControlName="email">
+                <input matInput placeholder="Email" formControlName="email" [attr.disabled]="isPending ? '' : null">
                 <mat-icon matSuffix>email</mat-icon>
                 <mat-error>{{ getErrorMessage(loginForm.controls.email) }}</mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Password</mat-label>
-                <input matInput placeholder="Password" type="password" formControlName="password">
+                <input matInput placeholder="Password" type="password" formControlName="password" [attr.disabled]="isPending ? '' : null">
                 <mat-icon matSuffix>vpn_key</mat-icon>
                 <mat-error>{{ getErrorMessage(loginForm.controls.password) }}</mat-error>
             </mat-form-field>
-            <button mat-flat-button color="primary">
+            <button
+                mat-flat-button
+                color="primary"
+                (click)="signin()"
+                *ngIf="!isPending"
+            >
                 Sign In
             </button>
-            <a [routerLink]="'/register'" class="register-link">
+            <div class="spinner" *ngIf="isPending">
+                <mat-spinner diameter="36"></mat-spinner>
+            </div>
+            <div class="wait-message" *ngIf="isPending">
+                Wait for a moment...
+            </div>
+            <a
+                [routerLink]="'/register'"
+                class="register-link"
+                *ngIf="!isPending"
+            >
                 or create an account
             </a>
         </form>

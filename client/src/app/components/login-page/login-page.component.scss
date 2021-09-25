@@ -27,7 +27,13 @@
             .title {
                 text-align: center;
                 font-size: 26pt;
-                margin-bottom: 32px;
+                margin-bottom: 12px;
+            }
+
+            .wrong-creds-message {
+                text-align: center;
+                margin-bottom: 16px;
+                color: $error;
             }
 
             .register-link {
@@ -38,6 +44,16 @@
                 &:active {
                     color: darken($color: $primary, $amount: 15%);
                 }
+            }
+
+            .spinner {
+                display: flex;
+                justify-content: center;
+            }
+
+            .wait-message {
+                margin-top: 16px;
+                text-align: center;
             }
         }
     }

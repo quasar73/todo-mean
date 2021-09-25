@@ -28,7 +28,19 @@
             .title {
                 text-align: center;
                 font-size: 26pt;
-                margin-bottom: 32px;
+                margin-bottom: 16px;
+            }
+
+            .exist-messages {
+                margin-bottom: 12px;
+                color: $error;
+                text-align: center;
+            }
+
+            .success-messages {
+                margin-bottom: 12px;
+                color: $primary;
+                text-align: center;
             }
 
             .register-link {
@@ -43,6 +55,16 @@
 
             button {
                 margin-top: 8px;
+            }
+
+            .spinner {
+                display: flex;
+                justify-content: center;
+            }
+
+            .wait-message {
+                margin-top: 16px;
+                text-align: center;
             }
         }
     }

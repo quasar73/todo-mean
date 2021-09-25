@@ -4,6 +4,12 @@
             <div class="title">
                 Sign Up
             </div>
+            <div class="exist-messages" *ngIf="!isSuccess">
+                {{ getExistMessage }}
+            </div>
+            <div class="success-messages" *ngIf="isSuccess">
+                {{ getSuccessMessage }}
+            </div>
             <mat-form-field appearance="outline">
                 <mat-label>Email</mat-label>
                 <input matInput placeholder="Email" formControlName="email">
@@ -28,10 +34,25 @@
                 <mat-icon matSuffix>vpn_key</mat-icon>
                 <mat-error>{{ getErrorMessage(registerForm.controls.confirmPassword) }}</mat-error>
             </mat-form-field>
-            <button mat-flat-button color="primary">
+            <button
+                mat-flat-button
+                color="primary"
+                (click)="signup()"
+                *ngIf="!isPending"
+            >
                 Sign Up
             </button>
-            <a [routerLink]="'/login'" class="register-link">
+            <div class="spinner" *ngIf="isPending">
+                <mat-spinner diameter="36"></mat-spinner>
+            </div>
+            <div class="wait-message" *ngIf="isPending">
+                Wait for a moment...
+            </div>
+            <a
+                [routerLink]="'/login'"
+                class="register-link"
+                *ngIf="!isPending"
+            >
                 or sign in if you have an account
             </a>
         </form>

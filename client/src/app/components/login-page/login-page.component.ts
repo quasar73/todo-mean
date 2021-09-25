@@ -5,8 +5,17 @@ import {
     transition,
     trigger,
 } from '@angular/animations';
+import { HttpErrorResponse } from '@angular/common/http';
 import { AfterViewInit, Component } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+    AbstractControl,
+    FormControl,
+    FormGroup,
+    Validators,
+} from '@angular/forms';
+import { Router } from '@angular/router';
+import { LoginModel } from 'src/app/shared/models/login.model';
+import { AuthenticationService } from 'src/app/shared/services/auth';
 
 @Component({
     selector: 'app-login-page',
@@ -37,17 +46,51 @@ import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/fo
 })
 export class LoginPageComponent implements AfterViewInit {
     cardState = 'invisible';
+    isPending = false;
+    wrongCredentials = false;
     loginForm: FormGroup = new FormGroup({
         email: new FormControl('', [Validators.required, Validators.email]),
         password: new FormControl('', [Validators.required]),
     });
 
-    constructor() {}
+    get getCredsMessage(): string {
+        return this.wrongCredentials ? 'Wrong Email or password!' : '⠀';
+    }
+
+    constructor(
+        private authService: AuthenticationService,
+        private router: Router
+    ) {}
 
     ngAfterViewInit(): void {
         setTimeout(() => {
             this.cardState = 'visible';
         }, 0);
+    }
+
+    signin(): void {
+        if (!this.loginForm.invalid) {
+            this.isPending = true;
+            this.wrongCredentials = false;
+            const loginModel: LoginModel = {
+                email: this.loginForm.controls.email.value,
+                password: this.loginForm.controls.password.value,
+            };
+
+            if (this.loginForm.valid) {
+                this.authService.login(loginModel).subscribe(
+                    () => {
+                        this.router.navigate(['/register']);
+                    },
+                    (err: HttpErrorResponse) => {
+                        this.isPending = false;
+                        if (err.status === 403) {
+                            this.wrongCredentials = true;
+                        }
+                    }
+                );
+            }
+        }
     }
 
     getErrorMessage(control: AbstractControl): string {
