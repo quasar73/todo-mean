@@ -1,3 +1,5 @@
+@import './../../styles/variables.scss';
+
 .wrap {
     height: 100%;
     width: 100%;
@@ -8,12 +10,36 @@
     .card {
         margin-top: -82px;
         background-color: white;
-        height: 490px;
-        width: 490px;
+        height: 420px;
+        width: 420px;
         border-radius: 16px;
+        padding: 32px;
+        box-sizing: border-box;
 
         -webkit-box-shadow: 3px 3px 10px 0px rgba(50, 50, 50, 0.5);
         -moz-box-shadow:    3px 3px 10px 0px rgba(50, 50, 50, 0.5);
         box-shadow:         3px 3px 10px 0px rgba(50, 50, 50, 0.5);
+
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            .title {
+                text-align: center;
+                font-size: 26pt;
+                margin-bottom: 32px;
+            }
+
+            .register-link {
+                text-align: center;
+                margin-top: 16px;
+                color: $primary;
+
+                &:active {
+                    color: darken($color: $primary, $amount: 15%);
+                }
+            }
+        }
     }
 }
