@@ -6,7 +6,7 @@ import {
     trigger,
 } from '@angular/animations';
 import { AfterViewInit, Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-login-page',
@@ -48,5 +48,17 @@ export class LoginPageComponent implements AfterViewInit {
         setTimeout(() => {
             this.cardState = 'visible';
         }, 0);
+    }
+
+    getErrorMessage(control: AbstractControl): string {
+        let error = '';
+
+        if (control.hasError('required')) {
+            error = 'This field is required';
+        } else if (control.hasError('email')) {
+            error = 'Enter Email adress';
+        }
+
+        return error;
     }
 }

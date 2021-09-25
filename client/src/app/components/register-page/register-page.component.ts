@@ -1,6 +1,13 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import {
+    animate,
+    state,
+    style,
+    transition,
+    trigger,
+} from '@angular/animations';
 import { AfterViewInit, Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ConfirmValidator } from 'src/app/shared/validators/confirm.validator';
 
 @Component({
     selector: 'app-register-page',
@@ -33,9 +40,19 @@ export class RegisterPageComponent implements AfterViewInit {
     cardState = 'invisible';
     registerForm: FormGroup = new FormGroup({
         email: new FormControl('', [Validators.required, Validators.email]),
-        userName: new FormControl('', [Validators.required, Validators.minLength(5)]),
-        password: new FormControl('', [Validators.required]),
-        repeatPassword: new FormControl('', [Validators.required]),
+        userName: new FormControl('', [
+            Validators.required,
+            Validators.minLength(5),
+        ]),
+        password: new FormControl('', [
+            Validators.required,
+            Validators.minLength(5),
+        ]),
+        confirmPassword: new FormControl('', [Validators.required]),
+    }, {
+        validators: [
+            ConfirmValidator.equalValidator('password', 'confirmPassword')
+        ]
     });
 
     constructor() {}
@@ -44,5 +61,21 @@ export class RegisterPageComponent implements AfterViewInit {
         setTimeout(() => {
             this.cardState = 'visible';
         }, 0);
+    }
+
+    getErrorMessage(control: AbstractControl): string {
+        let error = '';
+
+        if (control.hasError('required')) {
+            error = 'This field is required';
+        } else if (control.hasError('email')) {
+            error = 'Enter Email adress';
+        } else if (control.hasError('minlength')) {
+            error = 'Min length is 5';
+        } else if (control.hasError('notEqual')) {
+            error = 'Password mismatch';
+        }
+
+        return error;
     }
 }

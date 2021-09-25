@@ -2,33 +2,37 @@
     <div class="card" [@cardOpen]="cardState">
         <form [formGroup]="registerForm">
             <div class="title">
-                Sing Up
+                Sign Up
             </div>
             <mat-form-field appearance="outline">
                 <mat-label>Email</mat-label>
-                <input matInput placeholder="Email" fromFieldName="email">
+                <input matInput placeholder="Email" formControlName="email">
                 <mat-icon matSuffix>email</mat-icon>
+                <mat-error>{{ getErrorMessage(registerForm.controls.email) }}</mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>User name</mat-label>
-                <input matInput placeholder="Email" fromFieldName="email">
+                <input matInput placeholder="User name" formControlName="userName">
                 <mat-icon matSuffix>account_circle</mat-icon>
+                <mat-error>{{ getErrorMessage(registerForm.controls.userName) }}</mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Password</mat-label>
-                <input matInput placeholder="Password" type="password" fromFieldName="password">
+                <input matInput placeholder="Password" type="password" formControlName="password">
                 <mat-icon matSuffix>vpn_key</mat-icon>
+                <mat-error>{{ getErrorMessage(registerForm.controls.password) }}</mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline">
-                <mat-label>Repeat password</mat-label>
-                <input matInput placeholder="Password" type="password" fromFieldName="password">
+                <mat-label>Confirm password</mat-label>
+                <input matInput placeholder="Confirm password" type="password" formControlName="confirmPassword">
                 <mat-icon matSuffix>vpn_key</mat-icon>
+                <mat-error>{{ getErrorMessage(registerForm.controls.confirmPassword) }}</mat-error>
             </mat-form-field>
             <button mat-flat-button color="primary">
-                Sing Up
+                Sign Up
             </button>
             <a [routerLink]="'/login'" class="register-link">
-                or sing in if you have an account
+                or sign in if you have an account
             </a>
         </form>
     </div>

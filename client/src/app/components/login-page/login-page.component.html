@@ -6,16 +6,18 @@
             </div>
             <mat-form-field appearance="outline">
                 <mat-label>Email</mat-label>
-                <input matInput placeholder="Email" fromFieldName="email">
+                <input matInput placeholder="Email" formControlName="email">
                 <mat-icon matSuffix>email</mat-icon>
+                <mat-error>{{ getErrorMessage(loginForm.controls.email) }}</mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Password</mat-label>
-                <input matInput placeholder="Password" type="password" fromFieldName="password">
+                <input matInput placeholder="Password" type="password" formControlName="password">
                 <mat-icon matSuffix>vpn_key</mat-icon>
+                <mat-error>{{ getErrorMessage(loginForm.controls.password) }}</mat-error>
             </mat-form-field>
             <button mat-flat-button color="primary">
-                Sing In
+                Sign In
             </button>
             <a [routerLink]="'/register'" class="register-link">
                 or create an account
