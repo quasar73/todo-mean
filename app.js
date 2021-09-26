@@ -7,7 +7,8 @@ const passport = require('passport');
 const keys = require('./config/keys.dev');
 
 const authRoutes = require('./routes/auth');
-const lsitRoutes = require('./routes/list');
+const listRoutes = require('./routes/list');
+const itemRoutes = require('./routes/item');
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use('/api/auth', authRoutes);
-app.use('/api/list', lsitRoutes);
+app.use('/api/list', listRoutes);
+app.use('/api/item', itemRoutes);
 
 module.exports = app;

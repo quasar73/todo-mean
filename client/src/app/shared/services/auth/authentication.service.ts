@@ -68,7 +68,10 @@ export class AuthenticationService implements AuthService {
     public login(loginModel: LoginModel): Observable<any> {
         return this.base
             .post('auth/login', loginModel)
-            .pipe(tap((response: any) => this.saveAccessData(response.token)));
+            .pipe(tap((response: any) => {
+                this.saveAccessData(response.token);
+                this.saveRefreshToken(response.refreshToken);
+            }));
     }
 
     public registrate(registerModel: RegisterModel): Observable<any> {
@@ -85,5 +88,9 @@ export class AuthenticationService implements AuthService {
 
     private saveAccessData(token: string): void {
         this.tokenStorage.setAccessToken(token);
+    }
+
+    private saveRefreshToken(token: string): void {
+        this.tokenStorage.setRefreshToken(token);
     }
 }

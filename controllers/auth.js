@@ -16,7 +16,7 @@ module.exports.login = async (req, res) => {
                userName: user.userName,
                userId: user._id 
             }, keys.jwt, {
-                expiresIn: 60 * 60
+                expiresIn: keys.jwtExpire
             });
 
             res.status(200).json({

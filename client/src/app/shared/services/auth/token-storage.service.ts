@@ -28,5 +28,6 @@ export class TokenStorage {
 
     public clear(): void {
         localStorage.setItem(accessToken, '');
+        localStorage.setItem(refreshToken, '');
     }
 }

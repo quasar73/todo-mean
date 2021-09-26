@@ -21,6 +21,7 @@ import { MainPageComponent } from './components/main-page/main-page.component';
 import { NavBarComponent } from './shared/layouts/main-layout/nav-bar/nav-bar.component';
 import { ToDoListComponent } from './components/to-do-list/to-do-list.component';
 import { ListPageComponent } from './components/list-page/list-page.component';
+import { ItemComponent } from './components/item/item.component';
 
 @NgModule({
     declarations: [
@@ -33,6 +34,7 @@ import { ListPageComponent } from './components/list-page/list-page.component';
         NavBarComponent,
         ToDoListComponent,
         ListPageComponent,
+        ItemComponent,
     ],
     imports: [
         BrowserModule,

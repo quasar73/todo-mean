@@ -2,4 +2,22 @@
     <div class="title">
         {{ listTitle }}
     </div>
+    <div class="main-input">
+        <form [formGroup]="newToDoForm">
+            <button mat-fab color="primary" (click)="add()">
+                <mat-icon>check</mat-icon>
+            </button>
+            <mat-form-field appearance="outline">
+                <mat-label>Add new task here</mat-label>
+                <input matInput placeholder="Type any task title" formControlName="title" maxlength="160">
+            </mat-form-field>
+        </form>
+    </div>
+    <div class="items">
+        <todo-item
+            *ngFor="let item of items"
+            [item]="item"
+        >
+        </todo-item>
+    </div>
 </div>

@@ -1,5 +1,5 @@
 const express = require('express');
-const controller = require('../controllers/list');
+const controller = require('../controllers/item');
 const passport = require('passport');
 const router = express.Router();
 
@@ -10,7 +10,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), controller.ad
 router.delete('/', passport.authenticate('jwt', { session: false }), controller.delete);
 
 // GET api/item/
-router.get('/:id', passport.authenticate('jwt', { session: false }), controller.getByUserId);
+router.get('/:id', passport.authenticate('jwt', { session: false }), controller.getByListId);
 
 
 module.exports = router;
