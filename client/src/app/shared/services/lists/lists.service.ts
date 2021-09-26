@@ -16,4 +16,8 @@ export class ListsService {
     getLists(): Observable<{ lists: ListModel[] } | null> {
         return this.base.get('list/');
     }
+
+    getById(id: string): Observable<ListModel | null> {
+        return this.base.get(`list/${id}`);
+    }
 }

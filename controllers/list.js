@@ -39,3 +39,12 @@ module.exports.getByUserId = async (req, res) => {
         errorHandler(res, ex);
     }
 }
+
+module.exports.getById = async (req, res) => {
+    try {
+        const list = await List.findById(req.params.id);
+        res.status(200).json(list);
+    } catch(ex) {
+        errorHandler(res, ex);
+    }
+}

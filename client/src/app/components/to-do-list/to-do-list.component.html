@@ -8,11 +8,16 @@
         </button>
     </div>
     <div class="lists">
-        <div class="list-item" *ngFor="let item of userLists">
+        <a
+            [routerLink]="'/list/' + item._id"
+            routerLinkActive="active"
+            class="list-item"
+            *ngFor="let item of userLists"
+        >
             <mat-icon>list</mat-icon>
             <div class="title">
                 {{ item.title }}
             </div>
-        </div>
+        </a>
     </div>
 </div>

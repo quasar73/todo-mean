@@ -3,17 +3,14 @@ const controller = require('../controllers/list');
 const passport = require('passport');
 const router = express.Router();
 
-// POST api/list/
+// POST api/item/
 router.post('/', passport.authenticate('jwt', { session: false }), controller.add);
 
-// DELETE api/list/
+// DELETE api/item/
 router.delete('/', passport.authenticate('jwt', { session: false }), controller.delete);
 
-// GET api/list/
-router.get('/', passport.authenticate('jwt', { session: false }), controller.getByUserId);
-
-// GET api/list/
-router.get('/:id', passport.authenticate('jwt', { session: false }), controller.getById);
+// GET api/item/
+router.get('/:id', passport.authenticate('jwt', { session: false }), controller.getByUserId);
 
 
 module.exports = router;

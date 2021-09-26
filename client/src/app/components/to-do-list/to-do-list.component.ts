@@ -24,7 +24,6 @@ export class ToDoListComponent implements OnInit {
 
     uploadLists(): void {
         this.listsService.getLists().subscribe((res) => {
-            console.log(res);
             this.userLists = res?.lists ?? [];
         });
     }

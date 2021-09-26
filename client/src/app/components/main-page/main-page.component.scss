@@ -5,9 +5,16 @@
     justify-content: center;
 
     .text {
+        cursor: default;
         width: fit-content;
         height: fit-content;
+        padding: 26px;
         color: white;
         font-size: 22pt;
+        backdrop-filter: brightness(70%) blur(8px);
+        border-radius: 16px;
+        -webkit-box-shadow: 3px 3px 8px 0px rgba(0, 0, 0, 0.15);
+        -moz-box-shadow:    3px 3px 8px 0px rgba(0, 0, 0, 0.15);
+        box-shadow:         3px 3px 8px 0px rgba(0, 0, 0, 0.15);
     }
 }
