@@ -17,4 +17,8 @@ export class ItemsService {
     getItems(listId: string): Observable<{ items: ItemModel[] } | null> {
         return this.base.get(`item/${listId}`);
     }
+
+    updateItem(item: ItemModel): Observable<ItemModel | null> {
+        return this.base.put(`item/${item._id}`, item);
+    }
 }

@@ -1,7 +1,15 @@
 <div class="wrap">
     <div class="card">
         <div class="completed-wrap">
-            <mat-checkbox class="completed" color="primary">{{ title }}</mat-checkbox>
+            <mat-checkbox
+                class="completed"
+                color="primary"
+                (change)="onCheck()"
+                [(ngModel)]="completed"
+                [disabled]="pending"
+            >
+                {{ title }}
+            </mat-checkbox>
         </div>
     </div>
 </div>

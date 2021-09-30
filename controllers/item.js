@@ -33,3 +33,17 @@ module.exports.getByListId = async (req, res) => {
         errorHandler(res, ex);
     }
 }
+
+module.exports.update = async (req, res) => {
+    const updated = req.body;
+    try {
+        const item = await Item.findByIdAndUpdate(
+            { _id: req.params.id },
+            { $set: updated },
+            { new: true }
+        );
+        res.status(200).json(item);
+    } catch(ex) {
+        errorHandler(res, ex);
+    }
+}

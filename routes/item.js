@@ -12,5 +12,8 @@ router.delete('/', passport.authenticate('jwt', { session: false }), controller.
 // GET api/item/
 router.get('/:id', passport.authenticate('jwt', { session: false }), controller.getByListId);
 
+// PUT api/item/
+router.put('/:id', passport.authenticate('jwt', { session: false }), controller.update);
+
 
 module.exports = router;
