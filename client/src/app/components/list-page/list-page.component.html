@@ -4,9 +4,17 @@
     </div>
     <div class="main-input">
         <form [formGroup]="newToDoForm">
-            <button mat-fab color="primary" (click)="add()">
+            <button
+                mat-fab
+                color="primary"
+                (click)="add()"
+                *ngIf="!isPending"
+            >
                 <mat-icon>check</mat-icon>
             </button>
+            <div class="spinner" *ngIf="isPending">
+                <mat-spinner diameter="56"></mat-spinner>
+            </div>
             <mat-form-field appearance="outline">
                 <mat-label>Add new task here</mat-label>
                 <input matInput placeholder="Type any task title" formControlName="title" maxlength="160">
@@ -14,6 +22,10 @@
         </form>
     </div>
     <div class="items">
+        <div class="loader" *ngIf="loadingModels">
+            <mat-spinner color="accent">
+            </mat-spinner>
+        </div>
         <todo-item
             *ngFor="let item of items"
             [item]="item"

@@ -13,6 +13,8 @@ import { ItemsService } from 'src/app/shared/services/items/items.service';
 export class ListPageComponent implements OnInit {
     listTitle = 'Title';
     listId = '';
+    isPending = false;
+    loadingModels = false;
     items: ItemModel[] = [];
     newToDoForm = new FormGroup({
         title: new FormControl('')
@@ -26,6 +28,8 @@ export class ListPageComponent implements OnInit {
 
     ngOnInit(): void {
         this.activateRoute.params.subscribe((params) => {
+            this.items = [];
+            this.loadingModels = true;
             this.listsService.getById(params['id']).subscribe((list) => {
                 this.listTitle = list?.title ?? 'Title';
                 this.listId = params['id'];
@@ -37,11 +41,16 @@ export class ListPageComponent implements OnInit {
     add(): void {
         const title = this.newToDoForm.controls.title.value;
         if (title.length > 0) {
+            this.isPending = true;
             this.itemsService.addItem(title, this.listId).subscribe((res) => {
                 this.newToDoForm.reset();
+                this.isPending = false;
                 if (res) {
                     this.items.push(res);
                 }
+            },
+            () => {
+                this.isPending = false;
             });
         }
     }
@@ -49,6 +58,7 @@ export class ListPageComponent implements OnInit {
     getItems(): void {
         this.itemsService.getItems(this.listId).subscribe((res) => {
             this.items = res?.items ?? [];
+            this.loadingModels = false;
         });
     }
 }

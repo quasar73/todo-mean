@@ -4,7 +4,7 @@
 @include mat-core();
 
 $client-primary: mat-palette($primary-palette);
-$client-accent: mat-palette($mat-pink, A200, A100, A400);
+$client-accent: mat-palette($accent-palette, A200, A100, A400);
 $client-warn: mat-palette($error-palette);
 $client-theme: mat-light-theme(
     (

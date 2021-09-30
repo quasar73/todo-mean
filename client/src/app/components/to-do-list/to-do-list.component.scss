@@ -2,6 +2,10 @@ $button-size: 46px;
 $icon-size: 40px;
 
 .wrap {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
     .header {
         display: flex;
         justify-content: space-between;
@@ -30,6 +34,9 @@ $icon-size: 40px;
     }
 
     .lists {
+        flex-grow: 1;
+        overflow-y: auto;
+
         .list-item {
             cursor: pointer;
             display: flex;

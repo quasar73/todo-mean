@@ -4,6 +4,10 @@ $button-size: 70px;
 $icon-size: 46px;
 
 .wrap {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
     .logo {
         cursor: default;
         color: white;
@@ -76,6 +80,8 @@ $icon-size: 46px;
     }
 
     .lists {
+        flex-grow: 1;
+        overflow-y: auto;
         margin-top: 32px;
     }
 }
