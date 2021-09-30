@@ -29,9 +29,51 @@ body {
 
 body {
     background-color: #000204;
-    background-image: url('./assets/images/bg.png');
+    background-image: url("./assets/images/bg.png");
     background-repeat: no-repeat;
     background-size: cover;
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-button {
+    width: 0px;
+    height: 0px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ffffff;
+    border: 0px solid #ffffff;
+    border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #d1d1d1;
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: #bdbdbd;
+}
+
+::-webkit-scrollbar-track {
+    background: #ffffff59;
+    border: 0px none #ffffff59;
+    border-radius: 50px;
+}
+
+::-webkit-scrollbar-track:hover {
+    background: #ffffff59;
+}
+
+::-webkit-scrollbar-track:active {
+    background: #ffffff59;
+}
+
+::-webkit-scrollbar-corner {
+    background: transparent;
 }
