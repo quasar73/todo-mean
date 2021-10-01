@@ -14,6 +14,11 @@ export class ToDoListComponent implements OnInit {
 
     ngOnInit(): void {
         this.uploadLists();
+        this.listsService.needUpdate$.subscribe((res) => {
+            if (res) {
+                this.uploadLists();
+            }
+        });
     }
 
     add(): void {

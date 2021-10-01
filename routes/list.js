@@ -15,5 +15,8 @@ router.get('/', passport.authenticate('jwt', { session: false }), controller.get
 // GET api/list/
 router.get('/:id', passport.authenticate('jwt', { session: false }), controller.getById);
 
+// PUT api/list/
+router.put('/:id', passport.authenticate('jwt', { session: false }), controller.updateTitle);
+
 
 module.exports = router;

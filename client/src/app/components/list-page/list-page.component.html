@@ -1,7 +1,21 @@
 <div class="wrap">
-    <div class="title">
-        {{ listTitle }}
+    <div class="title" *ngIf="!changing && !loadingModels">
+        <div class="title-text">
+            {{ listTitle }}
+        </div>
+
+        <button mat-icon-button (click)="editTitle()">
+            <mat-icon>edit</mat-icon>
+        </button>
     </div>
+
+    <mat-spinner
+        color="accent"
+        diameter="44"
+        *ngIf="changing || loadingModels"
+    >
+    </mat-spinner>
+
     <div class="main-input">
         <form [formGroup]="newToDoForm">
             <button

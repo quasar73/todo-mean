@@ -1,0 +1,15 @@
+.wrap {
+    display: flex;
+    flex-direction: column;
+
+    .description {
+        font-size: 16pt;
+        margin-bottom: 16px;
+    }
+
+    .input {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}

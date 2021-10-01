@@ -10,9 +10,15 @@
     display: flex;
 
     .title {
-        font-size: 32pt;
-        color: white;
         margin-left: 16px;
+        color: white;
+        display: flex;
+        align-items: center;
+
+        .title-text {
+            font-size: 28pt;
+            margin-right: 8px;
+        }
     }
 
     .main-input {
@@ -21,7 +27,7 @@
         border-radius: 16px;
         padding: 32px;
         padding-top: 24px;
-        padding-bottom: 24px;
+        padding-bottom: 36px;
         -webkit-box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.2);
         -moz-box-shadow:    4px 4px 10px 0px rgba(0, 0, 0, 0.2);
         box-shadow:         4px 4px 10px 0px rgba(0, 0, 0, 0.2);

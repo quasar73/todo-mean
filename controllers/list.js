@@ -48,3 +48,16 @@ module.exports.getById = async (req, res) => {
         errorHandler(res, ex);
     }
 }
+
+module.exports.updateTitle = async (req, res) => {
+    try {
+        const list = await List.findOneAndUpdate(
+            { _id: req.params.id },
+            { $set: { title: req.body.title } },
+            { new: true }
+        );
+        res.status(200).json(list);
+    } catch(ex) {
+        errorHandler(res, ex);
+    }
+}

@@ -14,6 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.component';
 import { MainLayoutComponent } from './shared/layouts/main-layout/main-layout.component';
@@ -24,6 +25,7 @@ import { NavBarComponent } from './shared/layouts/main-layout/nav-bar/nav-bar.co
 import { ToDoListComponent } from './components/to-do-list/to-do-list.component';
 import { ListPageComponent } from './components/list-page/list-page.component';
 import { ItemComponent } from './components/item/item.component';
+import { CahngeTitleDialogComponent } from './components/cahnge-title-dialog/cahnge-title-dialog.component';
 
 @NgModule({
     declarations: [
@@ -37,6 +39,7 @@ import { ItemComponent } from './components/item/item.component';
         ToDoListComponent,
         ListPageComponent,
         ItemComponent,
+        CahngeTitleDialogComponent,
     ],
     imports: [
         BrowserModule,
@@ -52,6 +55,7 @@ import { ItemComponent } from './components/item/item.component';
         MatProgressSpinnerModule,
         MatCheckboxModule,
         FormsModule,
+        MatDialogModule,
     ],
     providers: [],
     bootstrap: [AppComponent],

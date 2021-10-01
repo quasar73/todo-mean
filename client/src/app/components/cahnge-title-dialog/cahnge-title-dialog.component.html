@@ -1,0 +1,15 @@
+<div class="wrap">
+    <div class="description">
+        Write new list title to change it.
+    </div>
+    <div class="input">
+        <mat-form-field appearance="outline">
+            <mat-label>New title</mat-label>
+            <input matInput [(ngModel)]="data.title" maxlength="50" required>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions class="buttons">
+        <button mat-stroked-button color="warn" (click)="onNoClick()">Cancel</button>
+        <button mat-flat-button color="primary" [mat-dialog-close]="data.title" cdkFocusInitial>OK</button>
+      </div>
+</div>
