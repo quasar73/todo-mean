@@ -20,6 +20,14 @@ export class ListPageComponent implements OnInit {
         title: new FormControl('')
     });
 
+    get openItems(): ItemModel[] {
+        return this.items.filter(i => !i.completed);
+    }
+
+    get completedItems(): ItemModel[] {
+        return this.items.filter(i => i.completed);
+    }
+
     constructor(
         private activateRoute: ActivatedRoute,
         private listsService: ListsService,

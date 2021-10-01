@@ -9,14 +9,18 @@ $icon-size: 46px;
     flex-direction: column;
 
     .logo {
-        cursor: default;
-        color: white;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        font-size: 28pt;
-        font-family: 'Be Vietnam Pro', sans-serif;
         text-align: center;
         padding-top: 32px;
         padding-bottom: 32px;
+
+        a {
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-size: 28pt;
+            font-family: 'Be Vietnam Pro', sans-serif;
+            width: fit-content;
+            text-decoration: none;
+        }
     }
 
     mat-icon {

@@ -2,9 +2,10 @@
 
 .wrap {
     margin-top: 16px;
+    margin-bottom: 16px;
 
     .card {
-        background-color: white;
+        background: linear-gradient(90deg, rgba(255, 255, 255, 1) 35%, rgba(255, 255, 255, 0.7) 100%);
         border-radius: 16px;
         padding: 20px;
         display: flex;
