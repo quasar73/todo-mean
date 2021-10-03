@@ -4,11 +4,9 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { ItemModel } from './../../shared/models/item.model';
 import {
     Component,
-    EventEmitter,
     Input,
     OnChanges,
     OnInit,
-    Output,
 } from '@angular/core';
 
 @Component({
@@ -22,13 +20,14 @@ export class ItemInfoComponent implements OnChanges, OnInit {
     notSaved = false;
     pending = false;
     completed = false;
+    deleting = false;
 
     itemForm: FormGroup = new FormGroup({
         title: new FormControl(''),
         description: new FormControl(''),
     });
 
-    constructor(private itemService: ItemsService, private storageService: StorageService) {}
+    constructor(private itemsService: ItemsService, private storageService: StorageService) {}
 
     ngOnInit(): void {
         this.storageService.changedItem$.subscribe((item) => {
@@ -63,7 +62,7 @@ export class ItemInfoComponent implements OnChanges, OnInit {
         this.pending = true;
         this.item.title = this.itemForm.controls.title.value;
         this.item.description = this.itemForm.controls.description.value;
-        this.itemService.updateItem(this.item).subscribe(
+        this.itemsService.updateItem(this.item).subscribe(
             (res) => {
                 this.pending = false;
                 if (res) {
@@ -80,11 +79,22 @@ export class ItemInfoComponent implements OnChanges, OnInit {
 
     completeChanged(): void {
         this.item.completed = this.completed;
-        this.itemService.updateItem(this.item).subscribe((res) => {
+        this.itemsService.updateItem(this.item).subscribe((res) => {
             if (res) {
                 this.item = res;
                 this.storageService.expandedItem$.next(this.item);
             }
+        });
+    }
+
+    remove(): void {
+        this.deleting = true;
+        this.itemsService.removeItem(this.item?._id).subscribe(() => {
+           this.deleting = false;
+           this.storageService.removedItemId$.next(this.item?._id);
+        },
+        () => {
+            this.deleting = false;
         });
     }
 }

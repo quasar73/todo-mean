@@ -7,7 +7,7 @@ const router = express.Router();
 router.post('/', passport.authenticate('jwt', { session: false }), controller.add);
 
 // DELETE api/item/
-router.delete('/', passport.authenticate('jwt', { session: false }), controller.delete);
+router.delete('/:id', passport.authenticate('jwt', { session: false }), controller.delete);
 
 // GET api/item/
 router.get('/:id', passport.authenticate('jwt', { session: false }), controller.getByListId);

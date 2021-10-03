@@ -20,7 +20,14 @@ module.exports.add = async (req, res) => {
 }
 
 module.exports.delete = async (req, res) => {
-    // delete
+    try {
+        await Item.findByIdAndRemove(req.params.id);
+        res.status(200).json({
+            message: 'Task successfully has been removed.'
+        });
+    } catch(ex) {
+        errorHandler(res, ex);
+    }
 }
 
 module.exports.getByListId = async (req, res) => {

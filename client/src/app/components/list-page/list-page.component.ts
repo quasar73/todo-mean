@@ -2,7 +2,7 @@ import { StorageService } from './../../shared/services/storage/storage.service'
 import { ItemModel } from './../../shared/models/item.model';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ListsService } from './../../shared/services/lists/lists.service';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ItemsService } from 'src/app/shared/services/items/items.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -85,10 +85,24 @@ export class ListPageComponent implements OnInit {
         this.storageService.expandedItem$.subscribe((item) => {
             if (item) {
                 this.expandedItem = item;
-                const arrayItem = this.items.find(i => i._id === item._id);
+                const arrayItem = this.items.find((i) => i._id === item._id);
                 if (arrayItem) {
                     arrayItem.completed = item.completed;
                     arrayItem.title = item.title;
+                }
+            }
+        });
+
+        this.storageService.removedItemId$.subscribe((id) => {
+            const index = this.items.findIndex((i) => i._id === id);
+            if (index > -1) {
+                this.items.splice(index, 1);
+                if (this.items.length === 0) {
+                    this.infoExpanded = false;
+                    this.expandedId = '';
+                } else {
+                    this.expandedId = this.items[index % this.items.length]._id;
+                    this.storageService.expandedItem$.next(this.items[index % this.items.length]);
                 }
             }
         });
@@ -151,9 +165,5 @@ export class ListPageComponent implements OnInit {
             this.expandedId = item._id;
             this.expandedItem = item;
         }
-    }
-
-    onUpdate(): void {
-        this.getItems();
     }
 }

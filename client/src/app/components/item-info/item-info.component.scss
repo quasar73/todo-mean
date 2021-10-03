@@ -44,7 +44,9 @@
                 padding-right: 32px;
 
                 .delete {
-                    color: $error;
+                    &:not(:disabled) {
+                        color: $error;
+                    }
                 }
 
                 .save {

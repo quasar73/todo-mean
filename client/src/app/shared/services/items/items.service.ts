@@ -21,4 +21,8 @@ export class ItemsService {
     updateItem(item: ItemModel): Observable<ItemModel | null> {
         return this.base.put(`item/${item._id}`, item);
     }
+
+    removeItem(id: string): Observable<{ message: string } | null> {
+        return this.base.delete(`item/${id}`);
+    }
 }

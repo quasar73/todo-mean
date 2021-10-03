@@ -37,6 +37,9 @@
             </form>
         </div>
         <div class="items">
+            <div class="empty-text" *ngIf="!items?.length">
+                This list is empty. You can add some task.
+            </div>
             <div class="loader" *ngIf="loadingModels">
                 <mat-spinner color="accent">
                 </mat-spinner>

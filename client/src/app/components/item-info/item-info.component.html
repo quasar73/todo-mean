@@ -18,7 +18,12 @@
             >
                 <mat-icon>save</mat-icon>
             </button>
-            <button mat-icon-button class="delete">
+            <button
+                mat-icon-button
+                class="delete"
+                [disabled]="deleting"
+                (click)="remove()"
+            >
                 <mat-icon>delete_outline</mat-icon>
             </button>
         </div>
