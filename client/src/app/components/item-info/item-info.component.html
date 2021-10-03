@@ -1,0 +1,54 @@
+<div class="wrap">
+    <div class="title" [class.completed]="this.item?.completed">
+        {{ item?.title }}
+    </div>
+    <div class="info">
+        <div class="card buttons">
+            <mat-checkbox
+                (change)="completeChanged()"
+                color="primary"
+                [(ngModel)]="completed"
+            >
+            </mat-checkbox>
+            <button
+                mat-icon-button
+                class="save"
+                [disabled]="!notSaved || pending"
+                (click)="save()"
+            >
+                <mat-icon>save</mat-icon>
+            </button>
+            <button mat-icon-button class="delete">
+                <mat-icon>delete_outline</mat-icon>
+            </button>
+        </div>
+        <form [formGroup]="itemForm">
+            <div class="card">
+                <mat-form-field appearance="outline">
+                    <mat-label>Title</mat-label>
+                    <input
+                        (change)="checkDifferences()"
+                        matInput
+                        placeholder="Title"
+                        formControlName="title"
+                        maxlength="100"
+                    >
+                </mat-form-field>
+            </div>
+            <div class="card">
+                <mat-form-field appearance="outline">
+                    <mat-label>Description</mat-label>
+                    <textarea
+                        (change)="checkDifferences()"
+                        matInput
+                        formControlName="description"
+                        cdkTextareaAutosize
+                        cdkAutosizeMinRows="16"
+                        cdkAutosizeMaxRows="23"
+                    >
+                    </textarea>
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+</div>

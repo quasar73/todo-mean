@@ -13,19 +13,26 @@
         -webkit-box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.2);
         -moz-box-shadow:    4px 4px 10px 0px rgba(0, 0, 0, 0.2);
         box-shadow:         4px 4px 10px 0px rgba(0, 0, 0, 0.2);
-    }
-}
+        transition: 0.15s;
+        display: flex;
 
-::ng-deep .mat-checkbox-label {
-    font-size: 14pt;
-    margin-left: 8px;
-}
+        &:hover {
+            cursor: pointer;
+            background-color: white;
+            transition: 0.15s;
+        }
 
-::ng-deep  .mat-checkbox-checked {
-    .mat-checkbox-label {
-        text-decoration: line-through;
-        text-decoration-thickness: 2px;
-        text-decoration-color: $primary;
-        color: rgb(130, 130, 130);
+        .text {
+            margin-left: 8px;
+            font-size: 14pt;
+
+            &.completed {
+                text-decoration: line-through;
+                text-decoration-thickness: 2px;
+                text-decoration-color: $primary;
+                color: rgb(130, 130, 130);
+                word-wrap: break-word;
+            }
+        }
     }
 }

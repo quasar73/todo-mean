@@ -1,62 +1,73 @@
 <div class="wrap">
-    <div class="title" *ngIf="!changing && !loadingModels">
-        <div class="title-text">
-            {{ listTitle }}
-        </div>
+    <div class="content">
+        <div class="title" *ngIf="!changing && !loadingModels">
+            <div class="title-text">
+                {{ listTitle }}
+            </div>
 
-        <button mat-icon-button (click)="editTitle()">
-            <mat-icon>edit</mat-icon>
-        </button>
-    </div>
-
-    <mat-spinner
-        color="accent"
-        diameter="44"
-        *ngIf="changing || loadingModels"
-    >
-    </mat-spinner>
-
-    <div class="main-input">
-        <form [formGroup]="newToDoForm">
-            <button
-                mat-fab
-                color="primary"
-                (click)="add()"
-                *ngIf="!isPending"
-            >
-                <mat-icon>check</mat-icon>
+            <button mat-icon-button (click)="editTitle()">
+                <mat-icon>edit</mat-icon>
             </button>
-            <div class="spinner" *ngIf="isPending">
-                <mat-spinner diameter="56"></mat-spinner>
+        </div>
+
+        <mat-spinner
+            color="accent"
+            diameter="44"
+            *ngIf="changing || loadingModels"
+        >
+        </mat-spinner>
+
+        <div class="main-input">
+            <form [formGroup]="newToDoForm">
+                <button
+                    mat-fab
+                    color="primary"
+                    (click)="add()"
+                    *ngIf="!isPending"
+                >
+                    <mat-icon>check</mat-icon>
+                </button>
+                <div class="spinner" *ngIf="isPending">
+                    <mat-spinner diameter="56"></mat-spinner>
+                </div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Add new task here</mat-label>
+                    <input matInput placeholder="Type any task title" formControlName="title" maxlength="100">
+                </mat-form-field>
+            </form>
+        </div>
+        <div class="items">
+            <div class="loader" *ngIf="loadingModels">
+                <mat-spinner color="accent">
+                </mat-spinner>
             </div>
-            <mat-form-field appearance="outline">
-                <mat-label>Add new task here</mat-label>
-                <input matInput placeholder="Type any task title" formControlName="title" maxlength="160">
-            </mat-form-field>
-        </form>
+            <div class="lists" *ngIf="!loadingModels">
+                <div class="list-title" *ngIf="openItems.length > 0">
+                    Open tasks ( {{ openItems.length }} / {{ items.length }} )
+                </div>
+                <todo-item
+                    (itemClick)="onItemClick($event)"
+                    *ngFor="let item of openItems"
+                    [item]="item"
+                >
+                </todo-item>
+                <div class="list-title" *ngIf="completedItems.length > 0">
+                    Completed tasks ( {{ completedItems.length }} / {{ items.length }} )
+                </div>
+                <todo-item
+                    (itemClick)="onItemClick($event)"
+                    *ngFor="let item of completedItems"
+                    [item]="item"
+                >
+                </todo-item>
+            </div>
+        </div>
     </div>
-    <div class="items">
-        <div class="loader" *ngIf="loadingModels">
-            <mat-spinner color="accent">
-            </mat-spinner>
-        </div>
-        <div class="lists" *ngIf="!loadingModels">
-            <div class="list-title" *ngIf="openItems.length > 0">
-                Open tasks ( {{ openItems.length }} / {{ items.length }} )
-            </div>
-            <todo-item
-                *ngFor="let item of openItems"
-                [item]="item"
-            >
-            </todo-item>
-            <div class="list-title" *ngIf="completedItems.length > 0">
-                Completed tasks ( {{ completedItems.length }} / {{ items.length }} )
-            </div>
-            <todo-item
-                *ngFor="let item of completedItems"
-                [item]="item"
-            >
-            </todo-item>
-        </div>
+
+    <div class="item-info" [@expandInfo]="infoExpanded">
+        <todo-item-info
+            [item]="expandedItem"
+        >
+        </todo-item-info>
     </div>
 </div>

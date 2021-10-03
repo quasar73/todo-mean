@@ -26,6 +26,7 @@ import { ToDoListComponent } from './components/to-do-list/to-do-list.component'
 import { ListPageComponent } from './components/list-page/list-page.component';
 import { ItemComponent } from './components/item/item.component';
 import { CahngeTitleDialogComponent } from './components/cahnge-title-dialog/cahnge-title-dialog.component';
+import { ItemInfoComponent } from './components/item-info/item-info.component';
 
 @NgModule({
     declarations: [
@@ -40,6 +41,7 @@ import { CahngeTitleDialogComponent } from './components/cahnge-title-dialog/cah
         ListPageComponent,
         ItemComponent,
         CahngeTitleDialogComponent,
+        ItemInfoComponent,
     ],
     imports: [
         BrowserModule,

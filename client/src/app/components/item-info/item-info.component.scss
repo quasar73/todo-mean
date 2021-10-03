@@ -1,0 +1,60 @@
+@import '../../styles/variables.scss';
+
+.wrap {
+    padding: 32px;
+    padding-bottom: 0px;
+    box-sizing: border-box;
+
+    .title {
+        color: white;
+        font-size: 22pt;
+        word-wrap: normal;
+        margin-bottom: 32px;
+        display: flex;
+        align-items: center;
+
+        button, mat-spinner {
+            margin-right: 8px;
+        }
+
+        &.completed {
+            text-decoration: line-through;
+            text-decoration-color: white;
+            text-decoration-thickness: 2px;
+        }
+    }
+
+    .info {
+        .card {
+            background-color: white;
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 16px;
+            display: flex;
+            flex-direction: column;
+            -webkit-box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.2);
+            -moz-box-shadow:    4px 4px 10px 0px rgba(0, 0, 0, 0.2);
+            box-shadow:         4px 4px 10px 0px rgba(0, 0, 0, 0.2);
+
+            &.buttons {
+                flex-direction: row;
+                align-items: center;
+                width: fit-content;
+                padding-left: 32px;
+                padding-right: 32px;
+
+                .delete {
+                    color: $error;
+                }
+
+                .save {
+                    margin-left: 12px;
+
+                    &:not(:disabled) {
+                        color: $primary;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,6 +1,6 @@
 <div class="wrap">
-    <div class="card">
-        <div class="completed-wrap">
+    <div class="card" (click)="onItemClick()">
+        <div class="completed-wrap" (click)="checkClick($event)">
             <mat-checkbox
                 class="completed"
                 color="primary"
@@ -8,8 +8,10 @@
                 [(ngModel)]="completed"
                 [disabled]="pending"
             >
-                {{ title }}
             </mat-checkbox>
+        </div>
+        <div class="text" [class.completed]="completed">
+            {{ title }}
         </div>
     </div>
 </div>
