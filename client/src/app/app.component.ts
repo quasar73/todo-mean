@@ -8,7 +8,7 @@ import { DomSanitizer } from '@angular/platform-browser';
     styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-    title = 'client';
+    title = 'MEAN-TODO';
 
     iconsList: string[] = ['github', 'linkedin'];
 

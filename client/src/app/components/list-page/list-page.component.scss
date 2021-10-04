@@ -37,6 +37,11 @@
             -moz-box-shadow:    4px 4px 10px 0px rgba(0, 0, 0, 0.2);
             box-shadow:         4px 4px 10px 0px rgba(0, 0, 0, 0.2);
 
+            ::ng-deep .mat-form-field-appearance-outline .mat-form-field-wrapper {
+                margin: 0;
+                padding-bottom: 0;
+            }
+
             form {
                 display: flex;
                 align-items: center;
@@ -89,9 +94,4 @@
         -moz-box-shadow:    3px 3px 20px 0px rgba(0, 0, 0, 0.1);
         box-shadow:         3px 3px 20px 0px rgba(0, 0, 0, 0.1);
     }
-}
-
-::ng-deep .mat-form-field-appearance-outline .mat-form-field-wrapper {
-    margin: 0;
-    padding-bottom: 0;
 }
