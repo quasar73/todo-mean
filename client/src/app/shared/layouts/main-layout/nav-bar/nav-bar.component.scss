@@ -88,4 +88,29 @@ $icon-size: 46px;
         overflow-y: auto;
         margin-top: 32px;
     }
+
+    .app-info {
+        height: 128px;
+        background: rgba(0, 0, 0, 0.25);
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 11pt;
+        padding: 32px;
+        box-sizing: border-box;
+
+        .social-links {
+            margin-top: 8px;
+
+            mat-icon {
+                margin-right: 12px;
+                cursor: pointer;
+                color: rgba(255, 255, 255, 0.6);
+                transition: 0.15s;
+
+                &:hover {
+                    transition: 0.15s;
+                    color: white;
+                }
+            }
+        }
+    }
 }

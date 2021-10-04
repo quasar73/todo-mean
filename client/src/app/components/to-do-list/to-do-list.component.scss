@@ -12,6 +12,7 @@ $icon-size: 40px;
         align-items: center;
         padding-left: 16px;
         padding-right: 16px;
+        margin-bottom: 16px;
 
         .title {
             color: white;
@@ -36,6 +37,14 @@ $icon-size: 40px;
     .lists {
         flex-grow: 1;
         overflow-y: auto;
+
+        .empty {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14pt;
+            width: 100%;
+            text-align: center;
+            margin-top: 16px;
+        }
 
         .list-item {
             cursor: pointer;

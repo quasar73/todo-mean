@@ -8,6 +8,9 @@
         </button>
     </div>
     <div class="lists">
+        <div class="empty" *ngIf="!userLists?.length">
+            Add new list.
+        </div>
         <a
             [routerLink]="'/list/' + item._id"
             routerLinkActive="active"

@@ -11,6 +11,11 @@ import { AuthenticationService } from 'src/app/shared/services/auth';
 export class NavBarComponent implements OnInit {
     userData!: UserData;
 
+    links = {
+        linkedin: 'https://www.linkedin.com/in/vladislav-brezgun-a45483191/',
+        github: 'https://github.com/quasar73/'
+    };
+
     get userName(): string {
         return this.userData?.userName ?? '<userName>';
     }
