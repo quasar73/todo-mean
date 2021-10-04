@@ -27,6 +27,7 @@ import { ListPageComponent } from './components/list-page/list-page.component';
 import { ItemComponent } from './components/item/item.component';
 import { CahngeTitleDialogComponent } from './components/cahnge-title-dialog/cahnge-title-dialog.component';
 import { ItemInfoComponent } from './components/item-info/item-info.component';
+import { DeleteListDialogComponent } from './components/delete-list-dialog/delete-list-dialog.component';
 
 @NgModule({
     declarations: [
@@ -42,6 +43,7 @@ import { ItemInfoComponent } from './components/item-info/item-info.component';
         ItemComponent,
         CahngeTitleDialogComponent,
         ItemInfoComponent,
+        DeleteListDialogComponent,
     ],
     imports: [
         BrowserModule,

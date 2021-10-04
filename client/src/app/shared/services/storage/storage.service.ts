@@ -10,6 +10,7 @@ export class StorageService {
     expandedItem$ = new BehaviorSubject<ItemModel | null>(null);
     changedItem$ = new Subject<ItemModel>();
     removedItemId$ = new Subject<string>();
+    removedListId$ = new Subject<string>();
 
     constructor() {}
 }

@@ -1,9 +1,10 @@
+import { DeleteListDialogComponent } from './../delete-list-dialog/delete-list-dialog.component';
 import { StorageService } from './../../shared/services/storage/storage.service';
 import { ItemModel } from './../../shared/models/item.model';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ListsService } from './../../shared/services/lists/lists.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ItemsService } from 'src/app/shared/services/items/items.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CahngeTitleDialogComponent } from '../cahnge-title-dialog/cahnge-title-dialog.component';
@@ -47,6 +48,7 @@ export class ListPageComponent implements OnInit {
     infoExpanded = false;
     expandedId = '';
     expandedItem!: ItemModel;
+    deleting = false;
 
     newToDoForm = new FormGroup({
         title: new FormControl(''),
@@ -65,7 +67,9 @@ export class ListPageComponent implements OnInit {
         private listsService: ListsService,
         private itemsService: ItemsService,
         private dialog: MatDialog,
-        private storageService: StorageService
+        private storageService: StorageService,
+        private router: Router,
+        private storage: StorageService
     ) {}
 
     ngOnInit(): void {
@@ -102,14 +106,16 @@ export class ListPageComponent implements OnInit {
                     this.expandedId = '';
                 } else {
                     this.expandedId = this.items[index % this.items.length]._id;
-                    this.storageService.expandedItem$.next(this.items[index % this.items.length]);
+                    this.storageService.expandedItem$.next(
+                        this.items[index % this.items.length]
+                    );
                 }
             }
         });
     }
 
     add(): void {
-        const title = this.newToDoForm.controls.title.value;
+        const title = this.newToDoForm.controls.title?.value ?? '';
         if (title.length > 0) {
             this.isPending = true;
             this.itemsService.addItem(title, this.listId).subscribe(
@@ -165,5 +171,28 @@ export class ListPageComponent implements OnInit {
             this.expandedId = item._id;
             this.expandedItem = item;
         }
+    }
+
+    removeList(): void {
+        const dialogRef = this.dialog.open(DeleteListDialogComponent, {
+            width: '400px',
+            data: { title: this.listTitle },
+        });
+
+        dialogRef.afterClosed().subscribe((result) => {
+            if (result) {
+                this.deleting = true;
+                this.listsService
+                    .removeList(this.listId)
+                    .subscribe((res) => {
+                        this.deleting = false;
+                        this.storage.removedListId$.next(this.listId);
+                        this.router.navigate(['/main']);
+                    },
+                    () => {
+                        this.deleting = false;
+                    });
+            }
+        });
     }
 }

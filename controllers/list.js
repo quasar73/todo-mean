@@ -19,10 +19,10 @@ module.exports.add = async (req, res) => {
 module.exports.delete = async (req, res) => {
     try {
         const listName = await List.findById(req.params.id);
-        List.remove({ _id: req.params.id });
-        Item.remove({ list: req.params.id });
+        await List.findByIdAndRemove(req.params.id);
+        await Item.remove({ list: req.params.id });
         res.status(200).json({
-            message: `List \'${listName}\' has been deleted.`
+            message: `List \'${listName}\' has been removed.`
         });
     } catch(ex) {
         errorHandler(res, ex);

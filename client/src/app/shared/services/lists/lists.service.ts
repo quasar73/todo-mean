@@ -26,4 +26,8 @@ export class ListsService {
     updateTitle(id: string, title: string): Observable<ListModel | null> {
         return this.base.put(`list/${id}`, { title });
     }
+
+    removeList(id: string): Observable<{ message: string } | null> {
+        return this.base.delete(`list/${id}`);
+    }
 }

@@ -1,0 +1,12 @@
+<div class="wrap">
+    <div class="dialog-title">
+        Delete the list
+    </div>
+    <div class="dialog-text">
+        Are you sure you want to delete the list <b>{{ data.title }}</b>&nbsp;?
+    </div>
+    <div mat-dialog-actions class="buttons">
+        <button mat-flat-button color="primary" (click)="onNoClick()">Cancel</button>
+        <button mat-stroked-button color="warn" [mat-dialog-close]="true" cdkFocusInitial>Delete</button>
+    </div>
+</div>

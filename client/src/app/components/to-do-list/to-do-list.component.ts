@@ -1,3 +1,4 @@
+import { StorageService } from './../../shared/services/storage/storage.service';
 import { ListModel } from './../../shared/models/list.model';
 import { ListsService } from './../../shared/services/lists/lists.service';
 import { Component, OnInit } from '@angular/core';
@@ -10,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class ToDoListComponent implements OnInit {
     userLists: ListModel[] = [];
 
-    constructor(private listsService: ListsService) {}
+    constructor(private listsService: ListsService, private storage: StorageService) {}
 
     ngOnInit(): void {
         this.uploadLists();
@@ -18,6 +19,11 @@ export class ToDoListComponent implements OnInit {
             if (res) {
                 this.uploadLists();
             }
+        });
+
+        this.storage.removedListId$.subscribe((id) => {
+            const index = this.userLists.findIndex(l => l._id === id);
+            this.userLists.splice(index, 1);
         });
     }
 
