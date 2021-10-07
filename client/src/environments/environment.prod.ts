@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+    production: false,
+    apiUrl: 'https://tranquil-atoll-49907.herokuapp.com/api/'
 };
