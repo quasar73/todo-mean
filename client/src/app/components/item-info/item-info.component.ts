@@ -2,40 +2,42 @@ import { StorageService } from './../../shared/services/storage/storage.service'
 import { ItemsService } from './../../shared/services/items/items.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ItemModel } from './../../shared/models/item.model';
-import {
-    Component,
-    Input,
-    OnChanges,
-    OnInit,
-} from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'todo-item-info',
     templateUrl: './item-info.component.html',
     styleUrls: ['./item-info.component.scss'],
 })
-export class ItemInfoComponent implements OnChanges, OnInit {
+export class ItemInfoComponent implements OnChanges, OnInit, OnDestroy {
     @Input() item!: ItemModel;
 
     notSaved = false;
     pending = false;
     completed = false;
     deleting = false;
+    subscriptions = new Subscription();
 
     itemForm: FormGroup = new FormGroup({
         title: new FormControl(''),
         description: new FormControl(''),
     });
 
-    constructor(private itemsService: ItemsService, private storageService: StorageService) {}
+    constructor(
+        private itemsService: ItemsService,
+        private storageService: StorageService
+    ) {}
 
     ngOnInit(): void {
-        this.storageService.changedItem$.subscribe((item) => {
-            if (item._id === this.item?._id) {
-                this.item = item;
-                this.completed = this.item?.completed ?? false;
-            }
-        });
+        this.subscriptions.add(
+            this.storageService.changedItem$.subscribe((item) => {
+                if (item._id === this.item?._id) {
+                    this.item = item;
+                    this.completed = this.item?.completed ?? false;
+                }
+            })
+        );
     }
 
     ngOnChanges(): void {
@@ -89,12 +91,19 @@ export class ItemInfoComponent implements OnChanges, OnInit {
 
     remove(): void {
         this.deleting = true;
-        this.itemsService.removeItem(this.item?._id).subscribe(() => {
-           this.deleting = false;
-           this.storageService.removedItemId$.next(this.item?._id);
-        },
-        () => {
-            this.deleting = false;
-        });
+        this.itemsService.removeItem(this.item?._id).subscribe(
+            () => {
+                this.deleting = false;
+                this.storageService.removedItemId$.next(this.item?._id);
+            },
+            () => {
+                this.deleting = false;
+            }
+        );
+    }
+
+
+    ngOnDestroy(): void {
+        this.subscriptions.unsubscribe();
     }
 }

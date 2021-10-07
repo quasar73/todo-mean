@@ -3,7 +3,7 @@ import { StorageService } from './../../shared/services/storage/storage.service'
 import { ItemModel } from './../../shared/models/item.model';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ListsService } from './../../shared/services/lists/lists.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ItemsService } from 'src/app/shared/services/items/items.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -15,6 +15,7 @@ import {
     transition,
     trigger,
 } from '@angular/animations';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'todo-list-page',
@@ -38,7 +39,7 @@ import {
         ]),
     ],
 })
-export class ListPageComponent implements OnInit {
+export class ListPageComponent implements OnInit, OnDestroy {
     listTitle = 'Title';
     listId = '';
     isPending = false;
@@ -49,6 +50,7 @@ export class ListPageComponent implements OnInit {
     expandedId = '';
     expandedItem!: ItemModel;
     deleting = false;
+    subscriptions = new Subscription();
 
     newToDoForm = new FormGroup({
         title: new FormControl(''),
@@ -80,38 +82,47 @@ export class ListPageComponent implements OnInit {
                 this.listTitle = list?.title ?? 'Title';
                 this.listId = params['id'];
                 this.getItems();
-                this.storageService.items$.subscribe((items) => {
-                    this.items = items;
-                });
+                this.subscriptions.add(
+                    this.storageService.items$.subscribe((items) => {
+                        this.items = items;
+                    })
+                );
             });
         });
 
-        this.storageService.expandedItem$.subscribe((item) => {
-            if (item) {
-                this.expandedItem = item;
-                const arrayItem = this.items.find((i) => i._id === item._id);
-                if (arrayItem) {
-                    arrayItem.completed = item.completed;
-                    arrayItem.title = item.title;
-                }
-            }
-        });
-
-        this.storageService.removedItemId$.subscribe((id) => {
-            const index = this.items.findIndex((i) => i._id === id);
-            if (index > -1) {
-                this.items.splice(index, 1);
-                if (this.items.length === 0) {
-                    this.infoExpanded = false;
-                    this.expandedId = '';
-                } else {
-                    this.expandedId = this.items[index % this.items.length]._id;
-                    this.storageService.expandedItem$.next(
-                        this.items[index % this.items.length]
+        this.subscriptions.add(
+            this.storageService.expandedItem$.subscribe((item) => {
+                if (item) {
+                    this.expandedItem = item;
+                    const arrayItem = this.items.find(
+                        (i) => i._id === item._id
                     );
+                    if (arrayItem) {
+                        arrayItem.completed = item.completed;
+                        arrayItem.title = item.title;
+                    }
                 }
-            }
-        });
+            })
+        );
+
+        this.subscriptions.add(
+            this.storageService.removedItemId$.subscribe((id) => {
+                const index = this.items.findIndex((i) => i._id === id);
+                if (index > -1) {
+                    this.items.splice(index, 1);
+                    if (this.items.length === 0) {
+                        this.infoExpanded = false;
+                        this.expandedId = '';
+                    } else {
+                        this.expandedId =
+                            this.items[index % this.items.length]._id;
+                        this.storageService.expandedItem$.next(
+                            this.items[index % this.items.length]
+                        );
+                    }
+                }
+            })
+        );
     }
 
     add(): void {
@@ -182,17 +193,21 @@ export class ListPageComponent implements OnInit {
         dialogRef.afterClosed().subscribe((result) => {
             if (result) {
                 this.deleting = true;
-                this.listsService
-                    .removeList(this.listId)
-                    .subscribe((res) => {
+                this.listsService.removeList(this.listId).subscribe(
+                    (res) => {
                         this.deleting = false;
                         this.storage.removedListId$.next(this.listId);
                         this.router.navigate(['/main']);
                     },
                     () => {
                         this.deleting = false;
-                    });
+                    }
+                );
             }
         });
+    }
+
+    ngOnDestroy(): void {
+        this.subscriptions.unsubscribe();
     }
 }
