@@ -4,7 +4,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const passport = require('passport');
-const keys = require('./config/keys.dev');
+const keys = require('./config/keys');
 
 const authRoutes = require('./routes/auth');
 const listRoutes = require('./routes/list');
