@@ -7,10 +7,16 @@ import {
     transition,
     trigger,
 } from '@angular/animations';
-import { AfterViewInit, Component } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import {
+    AbstractControl,
+    FormControl,
+    FormGroup,
+    Validators,
+} from '@angular/forms';
 import { ConfirmValidator } from 'src/app/shared/validators/confirm.validator';
 import { AuthenticationService } from 'src/app/shared/services/auth';
+import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-register-page',
@@ -39,28 +45,31 @@ import { AuthenticationService } from 'src/app/shared/services/auth';
         ]),
     ],
 })
-export class RegisterPageComponent implements AfterViewInit {
+export class RegisterPageComponent implements AfterViewInit, OnInit {
     cardState = 'invisible';
     alreadyExist = false;
     isPending = false;
     isSuccess = false;
-    registerForm: FormGroup = new FormGroup({
-        email: new FormControl('', [Validators.required, Validators.email]),
-        userName: new FormControl('', [
-            Validators.required,
-            Validators.minLength(5),
-            Validators.maxLength(16)
-        ]),
-        password: new FormControl('', [
-            Validators.required,
-            Validators.minLength(5),
-        ]),
-        confirmPassword: new FormControl('', [Validators.required]),
-    }, {
-        validators: [
-            ConfirmValidator.equalValidator('password', 'confirmPassword')
-        ]
-    });
+    registerForm: FormGroup = new FormGroup(
+        {
+            email: new FormControl('', [Validators.required, Validators.email]),
+            userName: new FormControl('', [
+                Validators.required,
+                Validators.minLength(5),
+                Validators.maxLength(16),
+            ]),
+            password: new FormControl('', [
+                Validators.required,
+                Validators.minLength(5),
+            ]),
+            confirmPassword: new FormControl('', [Validators.required]),
+        },
+        {
+            validators: [
+                ConfirmValidator.equalValidator('password', 'confirmPassword'),
+            ],
+        }
+    );
 
     get getExistMessage(): string {
         return this.alreadyExist ? 'This user is already exist' : '⠀';
@@ -70,7 +79,14 @@ export class RegisterPageComponent implements AfterViewInit {
         return this.isSuccess ? 'Success! Now you can sign in!' : '';
     }
 
-    constructor(private authService: AuthenticationService) {}
+    constructor(
+        private authService: AuthenticationService,
+        private titleService: Title
+    ) {}
+
+    ngOnInit(): void {
+        this.titleService.setTitle('Sign Up');
+    }
 
     ngAfterViewInit(): void {
         setTimeout(() => {
@@ -87,7 +103,8 @@ export class RegisterPageComponent implements AfterViewInit {
                 email: this.registerForm.controls.email.value,
                 userName: this.registerForm.controls.userName.value,
                 password: this.registerForm.controls.password.value,
-                confirmPassword: this.registerForm.controls.confirmPassword.value,
+                confirmPassword:
+                    this.registerForm.controls.confirmPassword.value,
             };
 
             if (this.registerForm.valid) {

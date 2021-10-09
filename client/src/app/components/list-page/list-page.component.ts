@@ -16,6 +16,8 @@ import {
     trigger,
 } from '@angular/animations';
 import { Subscription } from 'rxjs';
+import { AuthenticationService } from 'src/app/shared/services/auth';
+import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'todo-list-page',
@@ -71,7 +73,9 @@ export class ListPageComponent implements OnInit, OnDestroy {
         private dialog: MatDialog,
         private storageService: StorageService,
         private router: Router,
-        private storage: StorageService
+        private storage: StorageService,
+        private authenticationService: AuthenticationService,
+        private titleService: Title
     ) {}
 
     ngOnInit(): void {
@@ -86,6 +90,15 @@ export class ListPageComponent implements OnInit, OnDestroy {
                     this.storageService.items$.subscribe((items) => {
                         this.items = items;
                     })
+                );
+                this.subscriptions.add(
+                    this.authenticationService
+                        .getUserData()
+                        .subscribe((data) => {
+                            this.titleService.setTitle(
+                                `${data.userName} | ${this.listTitle}`
+                            );
+                        })
                 );
             });
         });

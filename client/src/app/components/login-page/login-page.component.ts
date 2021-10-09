@@ -13,6 +13,7 @@ import {
     FormGroup,
     Validators,
 } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { LoginModel } from 'src/app/shared/models/login.model';
 import { AuthenticationService } from 'src/app/shared/services/auth';
@@ -59,7 +60,8 @@ export class LoginPageComponent implements AfterViewInit, OnInit {
 
     constructor(
         private authService: AuthenticationService,
-        private router: Router
+        private router: Router,
+        private titleService: Title
     ) {}
 
     ngOnInit(): void {
@@ -67,7 +69,9 @@ export class LoginPageComponent implements AfterViewInit, OnInit {
             if (result) {
                 this.router.navigate(['/main']);
             }
-        })
+        });
+
+        this.titleService.setTitle('Sign In');
     }
 
     ngAfterViewInit(): void {
