@@ -27,11 +27,11 @@
                     mat-fab
                     color="primary"
                     (click)="add()"
-                    *ngIf="!isPending"
+                    *ngIf="!isPending && !loadingModels"
                 >
                     <mat-icon>check</mat-icon>
                 </button>
-                <div class="spinner" *ngIf="isPending">
+                <div class="spinner" *ngIf="isPending || loadingModels">
                     <mat-spinner diameter="56"></mat-spinner>
                 </div>
                 <mat-form-field appearance="outline">
@@ -41,7 +41,7 @@
             </form>
         </div>
         <div class="items">
-            <div class="empty-text" *ngIf="!items?.length">
+            <div class="empty-text" *ngIf="!items?.length && !loadingModels">
                 This list is empty. You can add some task.
             </div>
             <div class="loader" *ngIf="loadingModels">
