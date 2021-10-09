@@ -20,5 +20,5 @@ jobs:
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
         env:
           NODE_ENV: production
-          MONGO_URI: {{ secrets.MONGO_URI}}
-          JWT: {{ secrets.JWT }}
+          MONGO_URI: ${{ secrets.MONGO_URI }}
+          JWT: ${{ secrets.JWT }}
